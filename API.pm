@@ -82,6 +82,7 @@ sub _data {
 
 	my $data_json_hr = {};
 	$self->_data_lang_values($data_hr, $data_json_hr, 'labels');
+	$self->_data_lang_values($data_hr, $data_json_hr, 'descriptions');
 
 	my $data = decode_utf8(JSON::XS->new->utf8->encode($data_json_hr));
 
