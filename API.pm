@@ -5,7 +5,9 @@ use warnings;
 
 use Class::Utils qw(set_params);
 use Error::Pure qw(err);
+use JSON::XS qw(encode_json);
 use MediaWiki::API;
+use Unicode::UTF8 qw(decode_utf8);
 
 our $VERSION = 0.01;
 
@@ -58,18 +60,39 @@ sub new {
 }
 
 sub create_item {
-	my ($self, $options_hr) = @_;
+	my ($self, $data_hr) = @_;
 
 	my $res = $self->{'mediawiki_api'}->api({
 		'action' => 'wbeditentity',
 		'new' => 'item',
-		# TODO
-		'data' => '{}',
+		'data' => $self->_data($data_hr),
 		'token' => $self->{'_csrftoken'},
 	});
 	$self->_mediawiki_api_error($res, 'Cannot create item.');
 
 	return $res;
+}
+
+sub _data {
+	my ($self, $data_hr) = @_;
+
+	if (! defined $data_hr) {
+		return '{}';
+	}
+
+	my $data_json_hr;
+	if ($data_hr->{'labels'}) {
+		foreach my $label_key (keys %{$data_hr->{'labels'}}) {
+			$data_json_hr->{'labels'}->{$label_key} = {
+				'language' => $label_key,
+				'value' => $data_hr->{'labels'}->{$label_key},
+			};
+		}
+	}
+
+	my $data = decode_utf8(JSON::XS->new->utf8->encode($data_json_hr));
+
+	return $data;
 }
 
 sub _mediawiki_api_error {
