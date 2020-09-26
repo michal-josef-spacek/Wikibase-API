@@ -4,7 +4,8 @@ TODO
 api.php?action=wbeditentity&id=Q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}
 2. Implement properties
 api.php?action=wbeditentity&id=Q42&data={"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ExampleString","type":"string"}},"type":"statement","rank":"normal"}]}
-3.
+3. Kdyz se snazim vytvorit polozku, ktera uz existuje, tak mi to hodi error.
+4.
 
 Applied
 =======
