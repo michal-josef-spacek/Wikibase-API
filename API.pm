@@ -43,9 +43,7 @@ sub new {
 			'lgname' => $self->{'lgname'},
 			'lgpassword' => $self->{'lgpassword'},
 		});
-		if (! defined $login_ret) {
-			err "Cannot login.";
-		}
+		$self->_mediawiki_api_error($login_ret, 'Cannot login.');
 	}
 
 	# Token.
