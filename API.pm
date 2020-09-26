@@ -80,19 +80,29 @@ sub _data {
 		return '{}';
 	}
 
-	my $data_json_hr;
-	if ($data_hr->{'labels'}) {
-		foreach my $label_key (keys %{$data_hr->{'labels'}}) {
-			$data_json_hr->{'labels'}->{$label_key} = {
-				'language' => $label_key,
-				'value' => $data_hr->{'labels'}->{$label_key},
-			};
-		}
-	}
+	my $data_json_hr = {};
+	$self->_data_lang_values($data_hr, $data_json_hr, 'labels');
 
 	my $data = decode_utf8(JSON::XS->new->utf8->encode($data_json_hr));
 
 	return $data;
+}
+
+sub _data_lang_values {
+	my ($self, $data_hr, $data_json_hr, $data_key) = @_;
+
+	if (! exists $data_hr->{$data_key}) {
+		return;
+	}
+
+	foreach my $key (keys %{$data_hr->{$data_key}}) {
+		$data_json_hr->{$data_key}->{$key} = {
+			'language' => $key,
+			'value' => $data_hr->{$data_key}->{$key},
+		};
+	}
+
+	return;
 }
 
 sub _mediawiki_api_error {
