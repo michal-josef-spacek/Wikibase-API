@@ -83,6 +83,7 @@ sub _data {
 	my $data_json_hr = {};
 	$self->_data_lang_values($data_hr, $data_json_hr, 'labels');
 	$self->_data_lang_values($data_hr, $data_json_hr, 'descriptions');
+	$self->_data_claims($data_hr, $data_json_hr);
 
 	my $data = decode_utf8(JSON::XS->new->utf8->encode($data_json_hr));
 
@@ -101,6 +102,67 @@ sub _data_lang_values {
 			'language' => $key,
 			'value' => $data_hr->{$data_key}->{$key},
 		};
+	}
+
+	return;
+}
+
+sub _data_claims {
+	my ($self, $data_hr, $data_json_hr) = @_;
+
+	if (! exists $data_hr->{'claims'}) {
+		return;
+	}
+
+	foreach my $key (keys %{$data_hr->{'claims'}}) {
+		push @{$data_json_hr->{'claims'}},
+			$self->_process_claim($key, $data_hr->{'claims'}->{$key});
+	}
+
+	return;
+}
+
+sub _process_claim {
+	my ($self, $key, $value) = @_;
+
+	if ($value =~ m/^Q\d+$/) {
+		return {
+			'mainsnak' => {
+				'snaktype' => 'value',
+				'property' => $key,
+				'datavalue' => {
+					'value' => {
+						'id' => $value,
+						'entity-type' => 'item',
+						# numeric-id
+					},
+					'type' => 'wikibase-entityid',
+				},
+			},
+			'type' => 'statement',
+			'rank' => 'normal',
+		};
+	} elsif (ref $value eq 'ARRAY') {
+		my @ret;
+		foreach my $sub_value (@{$value}) {
+			push @ret, $self->_process_claim($key, $sub_value);
+		}
+		return @ret;
+	} elsif (ref $value eq '') {
+		return {
+			'mainsnak' => {
+				'snaktype' => 'value',
+				'property' => $key,
+				'datavalue' => {
+					'type' => 'string',
+					'value' => $value,
+				},
+			},
+			'type' => 'statement',
+			'rank' => 'normal',
+		};
+	} else {
+		err 'Unsupported value.';
 	}
 
 	return;
