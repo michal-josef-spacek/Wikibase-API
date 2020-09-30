@@ -79,8 +79,8 @@ sub _data {
 	if (! defined $data_o) {
 		return '{}';
 	} else {
-		if (! $data_o->isa('Wikidata::Simple')) {
-			err "Bad data. Must be 'Wikidata::Simple' object.";
+		if (! $data_o->isa('Wikidata::Content')) {
+			err "Bad data. Must be 'Wikidata::Content' object.";
 		}
 	}
 
