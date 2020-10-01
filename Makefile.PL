@@ -23,6 +23,7 @@ requires 'Error::Pure' => 0.15;
 requires 'MediaWiki::API' => 0;
 requires 'JSON::XS' => 0;
 requires 'Unicode::UTF8' => 0;
+requires 'Wikidata::Content::Struct' => 0;
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Wikidata-API/issues',
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Wikidata-API';
 resources 'repository' => 'git://github.com/michal-josef-spacek/Wikidata-API';

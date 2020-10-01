@@ -8,6 +8,7 @@ use Error::Pure qw(err);
 use JSON::XS qw(encode_json);
 use MediaWiki::API;
 use Unicode::UTF8 qw(decode_utf8);
+use Wikidata::Content::Struct;
 
 our $VERSION = 0.01;
 
@@ -84,7 +85,7 @@ sub _data {
 		}
 	}
 
-	my $data_json_hr = $data_o->serialize;
+	my $data_json_hr = Wikidata::Content::Struct->new->serialize($data_o);
 
 	my $data = decode_utf8(JSON::XS->new->utf8->encode($data_json_hr));
 
