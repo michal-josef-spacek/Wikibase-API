@@ -1,10 +1,6 @@
 TODO
 ====
-1. Implement sitelinks.
-api.php?action=wbeditentity&id=Q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}
 3. Kdyz se snazim vytvorit polozku, ktera uz existuje, tak mi to hodi error.
-4. Po udelani Wikidata::Datatype prepsan na to.
-Aktualne neni podpora hromady datovych typu
 5.
 
 Applied
@@ -12,3 +8,13 @@ Applied
 2. Implement properties
 api.php?action=wbeditentity&id=Q42&data={"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ExampleString","type":"string"}},"type":"statement","rank":"normal"}]}
 OK [20200926] skim
+
+1. Implement sitelinks.
+api.php?action=wbeditentity&id=Q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}
+Tohle je soucasti Wikidata::Content
+NONE [20201001] skim
+
+4. Po udelani Wikidata::Datatype prepsan na to.
+Aktualne neni podpora hromady datovych typu
+Je pouzivan Wikidata::Content, ktery tyhle Wikidata::Datatype interne pouziva.
+NONE [20201001] skim
