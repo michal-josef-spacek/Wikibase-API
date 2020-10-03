@@ -1,5 +1,5 @@
 ---
-abstract: 'Wikidata API class'
+abstract: 'Wikidata API class.'
 author:
   - 'Michal Josef Spacek <skim@cpan.org>'
 build_requires:
