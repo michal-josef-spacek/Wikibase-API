@@ -26,10 +26,10 @@ sub new {
 	$self->{'mediawiki_site'} = 'test.wikidata.org';
 
 	# Login name.
-	$self->{'lgname'} = undef;
+	$self->{'login_name'} = undef;
 
 	# Login password.
-	$self->{'lgpassword'} = undef;
+	$self->{'login_password'} = undef;
 
 	# Process parameters.
 	set_params($self, @params);
@@ -41,10 +41,10 @@ sub new {
 		= 'https://'.$self->{'mediawiki_site'}.'/w/api.php';
 
 	# Login.
-	if (defined $self->{'lgname'} && defined $self->{'lgpassword'}) {
+	if (defined $self->{'login_name'} && defined $self->{'login_password'}) {
 		my $login_ret = $self->{'mediawiki_api'}->login({
-			'lgname' => $self->{'lgname'},
-			'lgpassword' => $self->{'lgpassword'},
+			'lgname' => $self->{'login_name'},
+			'lgpassword' => $self->{'login_password'},
 		});
 		$self->_mediawiki_api_error($login_ret, 'Cannot login.');
 	}
