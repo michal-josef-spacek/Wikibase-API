@@ -61,12 +61,12 @@ sub new {
 }
 
 sub create_item {
-	my ($self, $data_hr) = @_;
+	my ($self, $wikidata_content) = @_;
 
 	my $res = $self->{'mediawiki_api'}->api({
 		'action' => 'wbeditentity',
 		'new' => 'item',
-		'data' => $self->_data($data_hr),
+		'data' => $self->_data($wikidata_content),
 		'token' => $self->{'_csrftoken'},
 	});
 	$self->_mediawiki_api_error($res, 'Cannot create item.');
@@ -75,17 +75,17 @@ sub create_item {
 }
 
 sub _data {
-	my ($self, $data_o) = @_;
+	my ($self, $wikidata_content) = @_;
 
-	if (! defined $data_o) {
+	if (! defined $wikidata_content) {
 		return '{}';
 	} else {
-		if (! $data_o->isa('Wikidata::Content')) {
+		if (! $wikidata_content->isa('Wikidata::Content')) {
 			err "Bad data. Must be 'Wikidata::Content' object.";
 		}
 	}
 
-	my $data_json_hr = Wikidata::Content::Struct->new->serialize($data_o);
+	my $data_json_hr = Wikidata::Content::Struct->new->serialize($wikidata_content);
 
 	my $data = decode_utf8(JSON::XS->new->utf8->encode($data_json_hr));
 
