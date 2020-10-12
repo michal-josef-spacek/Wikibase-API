@@ -97,8 +97,8 @@ sub _mediawiki_api_error {
 
 	if (! defined $res) {
 		err $message,
-			'error_code' => $self->{'mediawiki_api'}->{'error'}->{'code'},
-			'error_details' => $self->{'mediawiki_api'}->{'error'}->{'details'},
+			'Error code' => $self->{'mediawiki_api'}->{'error'}->{'code'},
+			'Error details' => $self->{'mediawiki_api'}->{'error'}->{'details'},
 		;
 	}
 
