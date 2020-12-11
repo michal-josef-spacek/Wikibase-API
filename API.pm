@@ -8,7 +8,7 @@ use Error::Pure qw(err);
 use JSON::XS qw(encode_json);
 use MediaWiki::API;
 use Unicode::UTF8 qw(decode_utf8);
-use Wikidata::Content::Struct;
+use Wikibase::Datatype::Struct::Item;
 
 our $VERSION = 0.01;
 
@@ -34,11 +34,14 @@ sub new {
 	# Process parameters.
 	set_params($self, @params);
 
+	$self->{'_mediawiki_base_uri'} = 'https://'.$self->{'mediawiki_site'};
+	$self->{'_mediawiki_entity_uri'} = $self->{'_mediawiki_base_uri'}.'/entity';
+
 	if (ref $self->{'mediawiki_api'} ne 'MediaWiki::API') {
 		err "Parameter 'mediawiki_api' must be a 'MediaWiki::API' instance."
 	}
 	$self->{'mediawiki_api'}->{'config'}->{'api_url'}
-		= 'https://'.$self->{'mediawiki_site'}.'/w/api.php';
+		= $self->{'_mediawiki_base_uri'}.'/w/api.php';
 
 	# Login.
 	if (defined $self->{'login_name'} && defined $self->{'login_password'}) {
@@ -61,12 +64,12 @@ sub new {
 }
 
 sub create_item {
-	my ($self, $wikidata_content) = @_;
+	my ($self, $item_obj) = @_;
 
 	my $res = $self->{'mediawiki_api'}->api({
 		'action' => 'wbeditentity',
 		'new' => 'item',
-		'data' => $self->_data($wikidata_content),
+		'data' => $self->_obj2json($item_obj),
 		'token' => $self->{'_csrftoken'},
 	});
 	$self->_mediawiki_api_error($res, 'Cannot create item.');
@@ -74,22 +77,40 @@ sub create_item {
 	return $res;
 }
 
-sub _data {
-	my ($self, $wikidata_content) = @_;
+sub get_item {
+	my ($self, $id) = @_;
 
-	if (! defined $wikidata_content) {
+	my $res = $self->{'mediawiki_api'}->api({
+		'action' => 'wbgetentities',
+		'format' => 'json',
+		'ids' => $id,
+	});
+	$self->_mediawiki_api_error($res, 'Cannot get item.');
+
+	my $struct_hr = $res->{'entities'}->{$id};
+
+	my $item_obj = Wikibase::Datatype::Struct::Item::struct2obj($struct_hr);
+
+	return $item_obj;
+}
+
+sub _obj2json {
+	my ($self, $item_obj) = @_;
+
+	if (! defined $item_obj) {
 		return '{}';
 	} else {
-		if (! $wikidata_content->isa('Wikidata::Content')) {
-			err "Bad data. Must be 'Wikidata::Content' object.";
+		if (! $item_obj->isa('Wikibase::Datatype::Item')) {
+			err "Bad data. Must be 'Wikibase::Datatype::Item' object.";
 		}
 	}
 
-	my $data_json_hr = Wikidata::Content::Struct->new->serialize($wikidata_content);
+	my $struct_hr = Wikibase::Datatype::Struct::Item::obj2struct($item_obj,
+		$self->{'_mediawiki_entity_uri'});
 
-	my $data = decode_utf8(JSON::XS->new->utf8->encode($data_json_hr));
+	my $json = decode_utf8(JSON::XS->new->utf8->encode($struct_hr));
 
-	return $data;
+	return $json;
 }
 
 sub _mediawiki_api_error {
@@ -122,7 +143,8 @@ Wikidata::API - Class for API to Wikidata (Wikibase) system.
  use Wikidata::API;
 
  my $obj = Wikidata::API->new(%params);
- my $res = $obj->create_item($wikidata_content);
+ my $res = $obj->create_item($item_obj);
+ my $item_obj = $obj->get_item($id);
 
 =head1 METHODS
 
@@ -164,10 +186,10 @@ Default value is undef.
 
 =head2 C<create_item>
 
- my $res = $obj->create_item($wikidata_content)
+ my $res = $obj->create_item($item_obj)
 
 Create item in system.
-C<$wikidata_content> is Wikidata::Content instance.
+C<$item_obj> is Wikibase::Datatype::Item instance.
 
 Returns reference to hash like this:
 
@@ -177,6 +199,14 @@ Returns reference to hash like this:
          },
          'success' => __STATUS_CODE__,
  }
+
+=head2 C<get_item>
+
+ my $item_obj = $obj->get_item($id);
+
+Get item from system.
+
+Returns Wikibase::Datatype::Item instance.
 
 =head1 ERRORS
 
@@ -193,48 +223,84 @@ Returns reference to hash like this:
  create_item():
          Bad data. Must be 'Wikidata::Content' object.
 
-=head1 EXAMPLE
+=head1 EXAMPLE1
 
  use strict;
  use warnings;
 
  use Data::Printer;
- use Unicode::UTF8 qw(decode_utf8);
- use Wikidata::Content;
+ use Wikibase::Datatype::Item;
  use Wikidata::API;
 
  # API object.
  my $api = Wikidata::API->new;
 
- # Content object.
- my $c = Wikidata::Content->new;
- $c->add_labels({
-         'cs' => 'Douglas Adams',
-         'en' => 'Douglas Adams',
- });
- $c->add_descriptions({
-         'cs' => decode_utf8('anglický spisovatel, humorista a dramatik'),
-         'en' => 'English writer and humorist',
- });
- my @aliases = (
-         'Douglas Noel Adams',
-         decode_utf8('Douglas Noël Adams'),
-         'Douglas N. Adams',
- );
- $c->add_aliases({
-         'cs' => \@aliases,
-         'en' => \@aliases,
- });
- $c->add_claim_item({'P31' => 'Q5'});
+ # Wikibase::Datatype::Item blank object.
+ my $item_obj = Wikibase::Datatype::Item->new;
 
  # Create item.
- my $res = $api->create_item($c);
+ my $res = $api->create_item($item_obj);
 
- # Print status:
- print 'Success: '.$res->{'success'}."\n";
+ # Dump response structure.
+ p $res;
 
- # Output:
- # Success: 1
+ # Output like:
+ # \ {
+ #     entity    {
+ #         aliases        {},
+ #         claims         {},
+ #         descriptions   {},
+ #         id             "Q213698",
+ #         labels         {},
+ #         lastrevid      535146,
+ #         sitelinks      {},
+ #         type           "item"
+ #     },
+ #     success   1
+ # }
+
+=head1 EXAMPLE2
+
+ use strict;
+ use warnings;
+
+ use Data::Printer;
+ use Wikidata::API;
+
+ if (@ARGV < 1) {
+         print STDERR "Usage: $0 id\n";
+         exit 1;
+ }
+ my $id = $ARGV[0];
+
+ # API object.
+ my $api = Wikidata::API->new;
+
+ # Get item.
+ my $item_obj = $api->get_item($id);
+
+ # Dump response structure.
+ p $item_obj;
+
+ # Output for Q213698 argument like:
+ # Wikibase::Datatype::Item  {
+ #     Parents       Mo::Object
+ #     public methods (9) : BUILD, can (UNIVERSAL), DOES (UNIVERSAL), err (Error::Pure), check_array_object (Mo::utils), check_number (Mo::utils), check_number_of_items (Mo::utils), isa (UNIVERSAL), VERSION (UNIVERSAL)
+ #     private methods (1) : __ANON__ (Mo::is)
+ #     internals: {
+ #         aliases        [],
+ #         descriptions   [],
+ #         id             "Q213698",
+ #         labels         [],
+ #         lastrevid      535146,
+ #         modified       "2020-12-11T22:26:06Z",
+ #         ns             0,
+ #         page_id        304259,
+ #         sitelinks      [],
+ #         statements     [],
+ #         title          "Q213698"
+ #     }
+ # }
 
 =head1 DEPENDENCIES
 
@@ -243,15 +309,19 @@ L<Error::Pure>,
 L<JSON::XS>,
 L<MediaWiki::API>,
 L<Unicode::UTF8>,
-L<Wikidata::Content::Struct>.
+L<Wikibase::Datatype::Item>.
 
 =head1 SEE ALSO
 
 =over
 
-=item L<Wikidata::Content>
+=item L<Wikibase::Datatype>
 
-Wikidata content class.
+Wikibase datatypes.
+
+=item L<Wikibase::Datatype::Struct>
+
+Wikibase structure serialization.
 
 =back
 

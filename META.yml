@@ -19,6 +19,7 @@ meta-spec:
 name: Wikidata-API
 no_index:
   directory:
+    - examples
     - inc
     - t
     - xt
@@ -28,7 +29,7 @@ requires:
   JSON::XS: 0
   MediaWiki::API: 0
   Unicode::UTF8: 0
-  Wikidata::Content::Struct: 0
+  Wikibase::Datatype: 0.03
   perl: 5.6.2
 resources:
   bugtracker: https://github.com/michal-josef-spacek/Wikidata-API/issues

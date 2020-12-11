@@ -4,39 +4,32 @@ use strict;
 use warnings;
 
 use Data::Printer;
-use Unicode::UTF8 qw(decode_utf8);
-use Wikidata::Content;
+use Wikibase::Datatype::Item;
 use Wikidata::API;
 
 # API object.
 my $api = Wikidata::API->new;
 
-# Content object.
-my $c = Wikidata::Content->new;
-$c->add_labels({
-        'cs' => 'Douglas Adams',
-        'en' => 'Douglas Adams',
-});
-$c->add_descriptions({
-        'cs' => decode_utf8('anglický spisovatel, humorista a dramatik'),
-        'en' => 'English writer and humorist',
-});
-my @aliases = (
-        'Douglas Noel Adams',
-        decode_utf8('Douglas Noël Adams'),
-        'Douglas N. Adams',
-);
-$c->add_aliases({
-        'cs' => \@aliases,
-        'en' => \@aliases,
-});
-$c->add_claim_item({'P31' => 'Q5'});
+# Wikibase::Datatype::Item blank object.
+my $item_obj = Wikibase::Datatype::Item->new;
 
 # Create item.
-my $res = $api->create_item($c);
+my $res = $api->create_item($item_obj);
 
-# Print status:
-print 'Success: '.$res->{'success'}."\n";
+# Dump response structure.
+p $res;
 
-# Output:
-# Success: 1
+# Output like:
+# \ {
+#     entity    {
+#         aliases        {},
+#         claims         {},
+#         descriptions   {},
+#         id             "Q213698",
+#         labels         {},
+#         lastrevid      535146,
+#         sitelinks      {},
+#         type           "item"
+#     },
+#     success   1
+# }
