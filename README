@@ -1,16 +1,16 @@
 NAME
-    Wikidata::API - Class for API to Wikidata (Wikibase) system.
+    Wikibase::API - Class for API to Wikibase (Wikibase) system.
 
 SYNOPSIS
-     use Wikidata::API;
+     use Wikibase::API;
 
-     my $obj = Wikidata::API->new(%params);
+     my $obj = Wikibase::API->new(%params);
      my $res = $obj->create_item($item_obj);
      my $item_obj = $obj->get_item($id);
 
 METHODS
   "new"
-     my $obj = Wikidata::API->new(%params);
+     my $obj = Wikibase::API->new(%params);
 
     Constructor.
 
@@ -73,7 +73,7 @@ ERRORS
                      Error details: %s
 
      create_item():
-             Bad data. Must be 'Wikidata::Content' object.
+             Bad data. Must be 'Wikibase::Datatype::Item' object.
 
 EXAMPLE1
      use strict;
@@ -81,10 +81,10 @@ EXAMPLE1
 
      use Data::Printer;
      use Wikibase::Datatype::Item;
-     use Wikidata::API;
+     use Wikibase::API;
 
      # API object.
-     my $api = Wikidata::API->new;
+     my $api = Wikibase::API->new;
 
      # Wikibase::Datatype::Item blank object.
      my $item_obj = Wikibase::Datatype::Item->new;
@@ -115,7 +115,7 @@ EXAMPLE2
      use warnings;
 
      use Data::Printer;
-     use Wikidata::API;
+     use Wikibase::API;
 
      if (@ARGV < 1) {
              print STDERR "Usage: $0 id\n";
@@ -124,7 +124,7 @@ EXAMPLE2
      my $id = $ARGV[0];
 
      # API object.
-     my $api = Wikidata::API->new;
+     my $api = Wikibase::API->new;
 
      # Get item.
      my $item_obj = $api->get_item($id);
@@ -164,7 +164,7 @@ SEE ALSO
         Wikibase structure serialization.
 
 REPOSITORY
-    <https://github.com/michal-josef-spacek/Wikidata-API>
+    <https://github.com/michal-josef-spacek/Wikibase-API>
 
 AUTHOR
     Michal Josef Špaček <mailto:skim@cpan.org>

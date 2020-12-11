@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Data::Printer;
-use Wikidata::API;
+use Wikibase::API;
 
 if (@ARGV < 1) {
         print STDERR "Usage: $0 id\n";
@@ -13,7 +13,7 @@ if (@ARGV < 1) {
 my $id = $ARGV[0];
 
 # API object.
-my $api = Wikidata::API->new;
+my $api = Wikibase::API->new;
 
 # Get item.
 my $item_obj = $api->get_item($id);

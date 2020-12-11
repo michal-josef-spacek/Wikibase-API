@@ -5,4 +5,4 @@ use Test::NoWarnings;
 use Test::Pod::Coverage 'tests' => 2;
 
 # Test.
-pod_coverage_ok('Wikidata::API', 'Wikidata::API is covered.');
+pod_coverage_ok('Wikibase::API', 'Wikibase::API is covered.');

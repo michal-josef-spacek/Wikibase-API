@@ -7,8 +7,8 @@ use Test::NoWarnings;
 BEGIN {
 
 	# Test.
-	use_ok('Wikidata::API');
+	use_ok('Wikibase::API');
 }
 
 # Test.
-require_ok('Wikidata::API');
+require_ok('Wikibase::API');

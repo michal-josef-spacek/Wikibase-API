@@ -1,9 +1,9 @@
 use strict;
 use warnings;
 
-use Wikidata::API;
 use Test::More 'tests' => 2;
 use Test::NoWarnings;
+use Wikibase::API;
 
 # Test.
-is($Wikidata::API::VERSION, 0.01, 'Version.');
+is($Wikibase::API::VERSION, 0.01, 'Version.');

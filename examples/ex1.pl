@@ -5,10 +5,10 @@ use warnings;
 
 use Data::Printer;
 use Wikibase::Datatype::Item;
-use Wikidata::API;
+use Wikibase::API;
 
 # API object.
-my $api = Wikidata::API->new;
+my $api = Wikibase::API->new;
 
 # Wikibase::Datatype::Item blank object.
 my $item_obj = Wikibase::Datatype::Item->new;

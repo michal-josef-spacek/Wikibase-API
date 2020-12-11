@@ -1,4 +1,4 @@
-package Wikidata::API;
+package Wikibase::API;
 
 use strict;
 use warnings;
@@ -136,13 +136,13 @@ __END__
 
 =head1 NAME
 
-Wikidata::API - Class for API to Wikidata (Wikibase) system.
+Wikibase::API - Class for API to Wikibase (Wikibase) system.
 
 =head1 SYNOPSIS
 
- use Wikidata::API;
+ use Wikibase::API;
 
- my $obj = Wikidata::API->new(%params);
+ my $obj = Wikibase::API->new(%params);
  my $res = $obj->create_item($item_obj);
  my $item_obj = $obj->get_item($id);
 
@@ -150,7 +150,7 @@ Wikidata::API - Class for API to Wikidata (Wikibase) system.
 
 =head2 C<new>
 
- my $obj = Wikidata::API->new(%params);
+ my $obj = Wikibase::API->new(%params);
 
 Constructor.
 
@@ -221,7 +221,7 @@ Returns Wikibase::Datatype::Item instance.
                  Error details: %s
 
  create_item():
-         Bad data. Must be 'Wikidata::Content' object.
+         Bad data. Must be 'Wikibase::Datatype::Item' object.
 
 =head1 EXAMPLE1
 
@@ -230,10 +230,10 @@ Returns Wikibase::Datatype::Item instance.
 
  use Data::Printer;
  use Wikibase::Datatype::Item;
- use Wikidata::API;
+ use Wikibase::API;
 
  # API object.
- my $api = Wikidata::API->new;
+ my $api = Wikibase::API->new;
 
  # Wikibase::Datatype::Item blank object.
  my $item_obj = Wikibase::Datatype::Item->new;
@@ -265,7 +265,7 @@ Returns Wikibase::Datatype::Item instance.
  use warnings;
 
  use Data::Printer;
- use Wikidata::API;
+ use Wikibase::API;
 
  if (@ARGV < 1) {
          print STDERR "Usage: $0 id\n";
@@ -274,7 +274,7 @@ Returns Wikibase::Datatype::Item instance.
  my $id = $ARGV[0];
 
  # API object.
- my $api = Wikidata::API->new;
+ my $api = Wikibase::API->new;
 
  # Get item.
  my $item_obj = $api->get_item($id);
@@ -327,7 +327,7 @@ Wikibase structure serialization.
 
 =head1 REPOSITORY
 
-L<https://github.com/michal-josef-spacek/Wikidata-API>
+L<https://github.com/michal-josef-spacek/Wikibase-API>
 
 =head1 AUTHOR
 

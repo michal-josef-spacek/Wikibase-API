@@ -1,5 +1,5 @@
 ---
-abstract: 'Wikidata API class.'
+abstract: 'Wikibase API class.'
 author:
   - 'Michal Josef Spacek <skim@cpan.org>'
 build_requires:
@@ -16,7 +16,7 @@ license: bsd
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
-name: Wikidata-API
+name: Wikibase-API
 no_index:
   directory:
     - examples
@@ -32,8 +32,8 @@ requires:
   Wikibase::Datatype: 0.03
   perl: 5.6.2
 resources:
-  bugtracker: https://github.com/michal-josef-spacek/Wikidata-API/issues
-  homepage: https://github.com/michal-josef-spacek/Wikidata-API
+  bugtracker: https://github.com/michal-josef-spacek/Wikibase-API/issues
+  homepage: https://github.com/michal-josef-spacek/Wikibase-API
   license: http://opensource.org/licenses/bsd-license.php
-  repository: git://github.com/michal-josef-spacek/Wikidata-API
+  repository: git://github.com/michal-josef-spacek/Wikibase-API
 version: '0.01'
