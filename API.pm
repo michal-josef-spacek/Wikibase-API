@@ -78,7 +78,19 @@ sub create_item {
 }
 
 sub get_item {
-	my ($self, $id) = @_;
+	my ($self, $id, $opts_hr) = @_;
+
+	my $struct_hr = $self->get_item_raw($id, $opts_hr);
+
+	my $item_obj = Wikibase::Datatype::Struct::Item::struct2obj($struct_hr);
+
+	return $item_obj;
+}
+
+sub get_item_raw {
+	my ($self, $id, $opts_hr) = @_;
+
+	# TODO $opts_hr - Muzu vyfiltrovat jenom claims napr.
 
 	my $res = $self->{'mediawiki_api'}->api({
 		'action' => 'wbgetentities',
@@ -89,9 +101,7 @@ sub get_item {
 
 	my $struct_hr = $res->{'entities'}->{$id};
 
-	my $item_obj = Wikibase::Datatype::Struct::Item::struct2obj($struct_hr);
-
-	return $item_obj;
+	return $struct_hr;
 }
 
 sub _obj2json {
