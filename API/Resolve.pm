@@ -39,13 +39,6 @@ sub new {
 	# Process parameters.
 	set_params($self, @params);
 
-	$self->{'api'} = Wikibase::API->new(
-		'mediawiki_api' => $self->{'mediawiki_api'},
-		'mediawiki_site' => $self->{'mediawiki_site'},
-		'login_name' => $self->{'login_name'},
-		'login_password' => $self->{'login_password'},
-	);
-
 	return $self;
 }
 
@@ -59,6 +52,7 @@ sub resolve {
 	if (-r $qid_file) {
 		$struct_hr = decode_json(slurp($qid_file));
 	} else {
+		$self->_lazy_api;
 		$struct_hr = $self->{'api'}->get_item_raw($qid);
 		barf($qid_file, encode_json($struct_hr));
 	}
@@ -66,6 +60,23 @@ sub resolve {
 	my $item_obj = Wikibase::Datatype::Struct::Item::struct2obj($struct_hr);
 
 	return $item_obj;
+}
+
+sub _lazy_api {
+	my $self = shift;
+
+	if (defined $self->{'api'}) {
+		return;
+	}
+
+	$self->{'api'} = Wikibase::API->new(
+		'mediawiki_api' => $self->{'mediawiki_api'},
+		'mediawiki_site' => $self->{'mediawiki_site'},
+		'login_name' => $self->{'login_name'},
+		'login_password' => $self->{'login_password'},
+	);
+
+	return;
 }
 
 1;
