@@ -55,16 +55,17 @@ sub resolve {
 	my $qid_label;
 	my $qid_file = catfile($self->{'resolve_dir'}, uc($qid));
 
-	my $res_hr;	
+	my $struct_hr;
 	if (-r $qid_file) {
-		$res_hr = decode_json(slurp($qid_file));
+		$struct_hr = decode_json(slurp($qid_file));
 	} else {
-		$res_hr = $self->{'api'}->get_item_raw($qid);
-		barf($qid_file, encode_json($res_hr));
+		$struct_hr = $self->{'api'}->get_item_raw($qid);
+		barf($qid_file, encode_json($struct_hr));
 	}
 
-	return $res_hr;
-	
+	my $item_obj = Wikibase::Datatype::Struct::Item::struct2obj($struct_hr);
+
+	return $item_obj;
 }
 
 1;
