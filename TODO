@@ -4,7 +4,9 @@ TODO
 5. Testy.
 6. Existuje nejake volani, ktere jenom prelozi qid na label v jazyku?
 7. Doc pro Resolve.pm
-8.
+8. Udelat neco jako MediaWiki::API::Wikibase a dalsi a prepsat to na ne.
+   Jsou to bloky API.
+9.
 
 Applied
 =======
