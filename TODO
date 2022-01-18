@@ -6,7 +6,9 @@ TODO
 7. Doc pro Resolve.pm
 8. Udelat neco jako MediaWiki::API::Wikibase a dalsi a prepsat to na ne.
    Jsou to bloky API.
-9.
+9. Rewrite to Wikibase::Datatype::JSON, ted je tam Struct a to neni typove v
+   pohode.
+10.
 
 Applied
 =======
