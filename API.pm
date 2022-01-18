@@ -35,7 +35,8 @@ sub new {
 	set_params($self, @params);
 
 	$self->{'_mediawiki_base_uri'} = 'https://'.$self->{'mediawiki_site'};
-	$self->{'_mediawiki_entity_uri'} = $self->{'_mediawiki_base_uri'}.'/entity/';
+	# XXX Entity URI has http instead of https.
+	$self->{'_mediawiki_entity_uri'} = 'http://'.$self->{'mediawiki_site'}.'/entity/';
 
 	if (ref $self->{'mediawiki_api'} ne 'MediaWiki::API') {
 		err "Parameter 'mediawiki_api' must be a 'MediaWiki::API' instance."
