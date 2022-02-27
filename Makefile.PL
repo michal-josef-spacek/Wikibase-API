@@ -24,6 +24,7 @@ requires 'MediaWiki::API' => 0;
 requires 'JSON::XS' => 0;
 requires 'Unicode::UTF8' => 0;
 requires 'Wikibase::Datatype' => 0.03;
+requires 'Wikibase::Datatype::Struct' => 0;
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Wikibase-API/issues',
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Wikibase-API';
 resources 'repository' => 'git://github.com/michal-josef-spacek/Wikibase-API';
