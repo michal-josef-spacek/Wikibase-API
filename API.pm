@@ -236,6 +236,8 @@ Returns Wikibase::Datatype::Item instance.
 
 =head1 EXAMPLE1
 
+=for comment filename=create_item_in_test_wikidata.pl
+
  use strict;
  use warnings;
 
@@ -271,6 +273,8 @@ Returns Wikibase::Datatype::Item instance.
  # }
 
 =head1 EXAMPLE2
+
+=for comment filename=get_item_from_test_wikidata.pl
 
  use strict;
  use warnings;
