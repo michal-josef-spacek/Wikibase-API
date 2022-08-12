@@ -4,8 +4,8 @@ use strict;
 use warnings;
 
 use Data::Printer;
-use Wikibase::Datatype::Item;
 use Wikibase::API;
+use Wikibase::Datatype::Item;
 
 # API object.
 my $api = Wikibase::API->new;
