@@ -9,6 +9,8 @@ use JSON::XS qw(encode_json);
 use MediaWiki::API;
 use Unicode::UTF8 qw(decode_utf8);
 use Wikibase::Datatype::Struct::Item;
+use Wikibase::Datatype::Struct::Lexeme;
+use Wikibase::Datatype::Struct::Mediainfo;
 
 our $VERSION = 0.01;
 
@@ -83,7 +85,18 @@ sub get_item {
 
 	my $struct_hr = $self->get_item_raw($id, $opts_hr);
 
-	my $item_obj = Wikibase::Datatype::Struct::Item::struct2obj($struct_hr);
+	my $item_obj;
+	if ($struct_hr->{'type'} eq 'item') {
+		$item_obj = Wikibase::Datatype::Struct::Item::struct2obj($struct_hr);
+	} elsif ($struct_hr->{'type'} eq 'mediainfo') {
+		$item_obj = Wikibase::Datatype::Struct::Mediainfo::struct2obj($struct_hr);
+	} elsif ($struct_hr->{'type'} eq 'lexeme') {
+		$item_obj = Wikibase::Datatype::Struct::Lexeme::struct2obj($struct_hr);
+	} else {
+		err 'Unsupported type.',
+			'Type', $struct_hr->{'type'},
+		;
+	}
 
 	return $item_obj;
 }

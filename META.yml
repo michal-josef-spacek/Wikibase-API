@@ -30,7 +30,9 @@ requires:
   MediaWiki::API: 0
   Unicode::UTF8: 0
   Wikibase::Datatype: 0.03
-  Wikibase::Datatype::Struct: 0
+  Wikibase::Datatype::Struct::Item: 0
+  Wikibase::Datatype::Struct::Lexeme: 0
+  Wikibase::Datatype::Struct::Mediainfo: 0
   perl: 5.6.2
 resources:
   bugtracker: https://github.com/michal-josef-spacek/Wikibase-API/issues
