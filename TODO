@@ -8,7 +8,9 @@ TODO
    Jsou to bloky API.
 9. Rewrite to Wikibase::Datatype::JSON, ted je tam Struct a to neni typove v
    pohode.
-10.
+10. Add example for lexeme get. L469
+11. Add example for mediainfo get. M95648152 ('mediawiki_site' => 'commons.wikimedia.org',)
+12.
 
 Applied
 =======
