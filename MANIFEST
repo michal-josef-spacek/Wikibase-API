@@ -19,6 +19,7 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml
 README
+SIGNATURE
 t/Wikibase-API-Resolve/01-use.t
 t/Wikibase-API-Resolve/02-version.t
 t/Wikibase-API/01-use.t
