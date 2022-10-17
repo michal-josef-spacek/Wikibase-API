@@ -10,7 +10,9 @@ TODO
    pohode.
 10. Add example for lexeme get. L469
 11. Add example for mediainfo get. M95648152 ('mediawiki_site' => 'commons.wikimedia.org',)
-12.
+12. There is a error code 3, no-such-entity: Could not find an entity with the ID "M123727639".
+    If entity doesn't exist, maybe not need to error.
+13.
 
 Applied
 =======
