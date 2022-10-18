@@ -12,7 +12,7 @@ use Wikibase::Datatype::Struct::Item;
 use Wikibase::Datatype::Struct::Lexeme;
 use Wikibase::Datatype::Struct::Mediainfo;
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 # Constructor.
 sub new {
@@ -374,6 +374,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.02
+0.03
 
 =cut
