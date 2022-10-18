@@ -84,6 +84,9 @@ sub get_item {
 	my ($self, $id, $opts_hr) = @_;
 
 	my $struct_hr = $self->get_item_raw($id, $opts_hr);
+	if (! exists $struct_hr->{'type'}) {
+		return;
+	}
 
 	my $item_obj;
 	if ($struct_hr->{'type'} eq 'item') {

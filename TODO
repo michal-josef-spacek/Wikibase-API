@@ -12,7 +12,13 @@ TODO
 11. Add example for mediainfo get. M95648152 ('mediawiki_site' => 'commons.wikimedia.org',)
 12. There is a error code 3, no-such-entity: Could not find an entity with the ID "M123727639".
     If entity doesn't exist, maybe not need to error.
-13.
+13. There is stay where $struct_hr in get_item() is:
+{
+    id        "M123928202",
+    missing   ""
+}
+I added check for type, but what's happening?
+14.
 
 Applied
 =======
