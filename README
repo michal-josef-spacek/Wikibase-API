@@ -1,5 +1,5 @@
 NAME
-    Wikibase::API - Class for API to Wikibase (Wikibase) system.
+    Wikibase::API - Wikibase API class.
 
 SYNOPSIS
      use Wikibase::API;

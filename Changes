@@ -1,4 +1,5 @@
 0.03
+ - Fix abstract in doc.
 
 0.02 2022-10-18T10:56:15+02:00
  - Add check for existing type.

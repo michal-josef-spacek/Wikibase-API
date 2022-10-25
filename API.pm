@@ -163,7 +163,7 @@ __END__
 
 =head1 NAME
 
-Wikibase::API - Class for API to Wikibase (Wikibase) system.
+Wikibase::API - Wikibase API class.
 
 =head1 SYNOPSIS
 
