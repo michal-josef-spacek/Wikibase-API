@@ -11,6 +11,7 @@ use Unicode::UTF8 qw(decode_utf8);
 use Wikibase::Datatype::Struct::Item;
 use Wikibase::Datatype::Struct::Lexeme;
 use Wikibase::Datatype::Struct::Mediainfo;
+use Wikibase::Datatype::Struct::Property;
 
 our $VERSION = 0.04;
 
@@ -84,6 +85,8 @@ sub get_item {
 		$item_obj = Wikibase::Datatype::Struct::Mediainfo::struct2obj($struct_hr);
 	} elsif ($struct_hr->{'type'} eq 'lexeme') {
 		$item_obj = Wikibase::Datatype::Struct::Lexeme::struct2obj($struct_hr);
+	} elsif ($struct_hr->{'type'} eq 'property') {
+		$item_obj = Wikibase::Datatype::Struct::Property::struct2obj($struct_hr);
 	} else {
 		err 'Unsupported type.',
 			'Type', $struct_hr->{'type'},
