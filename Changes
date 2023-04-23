@@ -1,4 +1,4 @@
-0.04
+0.04 2023-04-23T18:38:49+02:00
  - Add support for property.
  - Document get_item_raw() and add example to doc.
  - Fix base uri for test.wikidata.org. It's same as for www.wikidata.org.
