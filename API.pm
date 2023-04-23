@@ -39,7 +39,12 @@ sub new {
 
 	$self->{'_mediawiki_base_uri'} = 'https://'.$self->{'mediawiki_site'};
 	# XXX Entity URI has http instead of https.
-	$self->{'_mediawiki_entity_uri'} = 'http://'.$self->{'mediawiki_site'}.'/entity/';
+	if ($self->{'mediawiki_site'} eq 'test.wikidata.org') {
+		# XXX test.wikidata.org has same entity url as Wikidata.
+		$self->{'_mediawiki_entity_uri'} = 'http://www.wikidata.org/entity/';
+	} else {
+		$self->{'_mediawiki_entity_uri'} = 'http://'.$self->{'mediawiki_site'}.'/entity/';
+	}
 
 	if (ref $self->{'mediawiki_api'} ne 'MediaWiki::API') {
 		err "Parameter 'mediawiki_api' must be a 'MediaWiki::API' instance."
