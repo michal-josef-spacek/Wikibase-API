@@ -1,5 +1,6 @@
 0.04
  - Add support for property.
+ - Document get_item_raw() and add example to doc.
  - Fix base uri for test.wikidata.org. It's same as for www.wikidata.org.
  - Fix test requirements.
  - Update copyright years.
