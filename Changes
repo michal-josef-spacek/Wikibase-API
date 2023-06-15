@@ -1,5 +1,6 @@
 0.05
  - Fix error output, could be utf8.
+ - Update Module::Install to 1.21 version.
 
 0.04 2023-04-23T18:38:49+02:00
  - Add support for property.
