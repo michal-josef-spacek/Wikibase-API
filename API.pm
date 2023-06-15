@@ -7,7 +7,7 @@ use Class::Utils qw(set_params);
 use Error::Pure qw(err);
 use JSON::XS qw(encode_json);
 use MediaWiki::API;
-use Unicode::UTF8 qw(decode_utf8);
+use Unicode::UTF8 qw(decode_utf8 encode_utf8);
 use Wikibase::Datatype::Struct::Item;
 use Wikibase::Datatype::Struct::Lexeme;
 use Wikibase::Datatype::Struct::Mediainfo;
@@ -175,7 +175,7 @@ sub _mediawiki_api_error {
 	if (! defined $res) {
 		err $message,
 			'Error code' => $self->{'mediawiki_api'}->{'error'}->{'code'},
-			'Error details' => $self->{'mediawiki_api'}->{'error'}->{'details'},
+			'Error details' => encode_utf8($self->{'mediawiki_api'}->{'error'}->{'details'}),
 		;
 	}
 
