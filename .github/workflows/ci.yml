@@ -54,7 +54,18 @@ jobs:
       run: |
          cat  /Users/runner/.cpanm/work/*/build.log
 
-    - name: Run tests
+    - name: Run tests on OSX || Ubuntu
+      if:  ${{ startsWith( matrix.runner, 'macos-') || startsWith( matrix.runner, 'ubuntu-') }}
+      env:
+        AUTHOR_TESTING: 1
+        RELEASE_TESTING: 1
+      run: |
+        perl Makefile.PL
+        make
+        make test
+
+    - name: Run tests on Windows
+      if:  ${{ startsWith( matrix.runner, 'windows-latest') }}
       env:
         AUTHOR_TESTING: 1
         RELEASE_TESTING: 1
