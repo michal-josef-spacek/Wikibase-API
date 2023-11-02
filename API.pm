@@ -22,17 +22,17 @@ sub new {
 	# Create object.
 	my $self = bless {}, $class;
 
-	# MediaWiki::API object.
-	$self->{'mediawiki_api'} = MediaWiki::API->new;
-
-	# MediaWiki site.
-	$self->{'mediawiki_site'} = 'test.wikidata.org';
-
 	# Login name.
 	$self->{'login_name'} = undef;
 
 	# Login password.
 	$self->{'login_password'} = undef;
+
+	# MediaWiki::API object.
+	$self->{'mediawiki_api'} = MediaWiki::API->new;
+
+	# MediaWiki site.
+	$self->{'mediawiki_site'} = 'test.wikidata.org';
 
 	# Process parameters.
 	set_params($self, @params);
@@ -215,18 +215,6 @@ Returns instance of object.
 
 =over 8
 
-=item * C<mediawiki_api>
-
-MediaWiki::API object.
-
-Default value is MediaWiki::API->new.
-
-=item * C<mediawiki_site>
-
-MediaWiki site.
-
-Default value is 'test.wikidata.org'.
-
 =item * C<login_name>
 
 Login name.
@@ -238,6 +226,18 @@ Default value is undef.
 Login password.
 
 Default value is undef.
+
+=item * C<mediawiki_api>
+
+MediaWiki::API object.
+
+Default value is MediaWiki::API->new.
+
+=item * C<mediawiki_site>
+
+MediaWiki site.
+
+Default value is 'test.wikidata.org'.
 
 =back
 
