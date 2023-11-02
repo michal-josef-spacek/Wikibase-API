@@ -1,4 +1,5 @@
 0.05
+ - Add constructor tests.
  - Fix error output, could be utf8.
  - Update Module::Install to 1.21 version.
 
