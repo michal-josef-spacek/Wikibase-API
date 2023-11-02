@@ -1,6 +1,7 @@
 0.05
  - Add constructor tests.
  - Fix error output, could be utf8.
+ - Improve doc in Wikibase::API.
  - Sort Wikibase::API parameters in code and doc.
  - Update Module::Install to 1.21 version.
 

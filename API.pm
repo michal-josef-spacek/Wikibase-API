@@ -211,8 +211,6 @@ Wikibase::API - Wikibase API class.
 
 Constructor.
 
-Returns instance of object.
-
 =over 8
 
 =item * C<login_name>
@@ -240,6 +238,8 @@ MediaWiki site.
 Default value is 'test.wikidata.org'.
 
 =back
+
+Returns instance of object.
 
 =head2 C<create_item>
 

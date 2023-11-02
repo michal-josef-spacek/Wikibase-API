@@ -15,7 +15,6 @@ METHODS
 
     Constructor.
 
-    Returns instance of object.
     *       "login_name"
 
             Login name.
@@ -40,6 +39,7 @@ METHODS
 
             Default value is 'test.wikidata.org'.
 
+    Returns instance of object.
 
   "create_item"
      my $res = $obj->create_item($item_obj)
