@@ -4,8 +4,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-#  schedule:
-#    - cron: '42 5 * * *'
 
 jobs:
   test:
@@ -62,7 +60,5 @@ jobs:
         RELEASE_TESTING: 1
       run: |
         perl Makefile.PL
-        make
-        make test
-
-
+        gmake
+        gmake test
