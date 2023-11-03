@@ -83,6 +83,7 @@ sub get_item {
 		return;
 	}
 
+	# XXX Rewrite to Wikibase::Datatype::Struct
 	my $item_obj;
 	if ($struct_hr->{'type'} eq 'item') {
 		$item_obj = Wikibase::Datatype::Struct::Item::struct2obj($struct_hr);
