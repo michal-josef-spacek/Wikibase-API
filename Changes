@@ -1,5 +1,6 @@
 0.05
  - Add constructor tests.
+ - Fix depdendencies.
  - Fix error output, could be utf8.
  - Improve doc in Wikibase::API.
  - Sort Wikibase::API parameters in code and doc.

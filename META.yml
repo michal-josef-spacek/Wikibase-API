@@ -39,6 +39,7 @@ requires:
   Wikibase::Datatype::Struct::Item: 0
   Wikibase::Datatype::Struct::Lexeme: 0
   Wikibase::Datatype::Struct::Mediainfo: 0
+  Wikibase::Datatype::Struct::Property: 0
   perl: 5.6.2
 resources:
   bugtracker: https://github.com/michal-josef-spacek/Wikibase-API/issues
