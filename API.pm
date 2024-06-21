@@ -58,7 +58,7 @@ sub new {
 }
 
 sub create_item {
-	my ($self, $item_obj) = @_;
+	my ($self, $item_obj, $summary) = @_;
 
 	$self->_init;
 
@@ -66,6 +66,9 @@ sub create_item {
 		'action' => 'wbeditentity',
 		'new' => 'item',
 		'data' => $self->_obj2json($item_obj),
+		defined $summary ? (
+			'summary' => $summary,
+		) : (),
 		'token' => $self->{'_csrftoken'},
 	});
 	$self->_mediawiki_api_error($res, 'Cannot create item.');
@@ -200,7 +203,7 @@ Wikibase::API - Wikibase API class.
  use Wikibase::API;
 
  my $obj = Wikibase::API->new(%params);
- my $res = $obj->create_item($item_obj);
+ my $res = $obj->create_item($item_obj, $summary);
  my $item_obj = $obj->get_item($id);
  my $struct_hr = $obj->get_item_raw($id);
 
@@ -244,10 +247,11 @@ Returns instance of object.
 
 =head2 C<create_item>
 
- my $res = $obj->create_item($item_obj)
+ my $res = $obj->create_item($item_obj, $summary);
 
 Create item in system.
 C<$item_obj> is Wikibase::Datatype::Item instance.
+C<$summary> is text comment of change.
 
 Returns reference to hash like this:
 
