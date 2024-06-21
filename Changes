@@ -5,6 +5,7 @@
  - Improve doc in Wikibase::API.
  - Sort Wikibase::API parameters in code and doc.
  - Update Module::Install to 1.21 version.
+ - Update copyright years.
 
 0.04 2023-04-23T18:38:49+02:00
  - Add support for property.
