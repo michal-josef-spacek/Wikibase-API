@@ -13,7 +13,7 @@ use Wikibase::Datatype::Struct::Lexeme;
 use Wikibase::Datatype::Struct::Mediainfo;
 use Wikibase::Datatype::Struct::Property;
 
-our $VERSION = 0.05;
+our $VERSION = 0.06;
 
 # Constructor.
 sub new {
@@ -602,6 +602,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.05
+0.06
 
 =cut
