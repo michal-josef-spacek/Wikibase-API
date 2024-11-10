@@ -82,7 +82,7 @@ ERRORS
                      Error details: %s
 
      create_item():
-             Bad data. Must be 'Wikibase::Datatype::Item' object.
+             Bad data. Not supported object.
 
 EXAMPLE1
      use strict;

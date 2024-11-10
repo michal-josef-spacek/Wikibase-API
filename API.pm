@@ -300,7 +300,7 @@ Returns reference to hash.
                  Error details: %s
 
  create_item():
-         Bad data. Must be 'Wikibase::Datatype::Item' object.
+         Bad data. Not supported object.
 
 =head1 EXAMPLE1
 
