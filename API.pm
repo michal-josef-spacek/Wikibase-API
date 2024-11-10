@@ -157,16 +157,17 @@ sub _init {
 sub _obj2json {
 	my ($self, $item_obj) = @_;
 
+	my $struct_hr;
 	if (! defined $item_obj) {
 		return '{}';
 	} else {
-		if (! $item_obj->isa('Wikibase::Datatype::Item')) {
-			err "Bad data. Must be 'Wikibase::Datatype::Item' object.";
+		if ($item_obj->isa('Wikibase::Datatype::Item')) {
+			$struct_hr = Wikibase::Datatype::Struct::Item::obj2struct($item_obj,
+				$self->{'_mediawiki_entity_uri'});
+		} else {
+			err 'Bad data. Not supported object.';
 		}
 	}
-
-	my $struct_hr = Wikibase::Datatype::Struct::Item::obj2struct($item_obj,
-		$self->{'_mediawiki_entity_uri'});
 
 	my $json = decode_utf8(JSON::XS->new->utf8->encode($struct_hr));
 
