@@ -5,7 +5,7 @@ SYNOPSIS
      use Wikibase::API;
 
      my $obj = Wikibase::API->new(%params);
-     my $res = $obj->create_item($item_obj);
+     my $res = $obj->create_item($item_obj, $summary);
      my $item_obj = $obj->get_item($id);
      my $struct_hr = $obj->get_item_raw($id);
 
@@ -42,9 +42,10 @@ METHODS
     Returns instance of object.
 
   "create_item"
-     my $res = $obj->create_item($item_obj)
+     my $res = $obj->create_item($item_obj, $summary);
 
     Create item in system. $item_obj is Wikibase::Datatype::Item instance.
+    $summary is text comment of change.
 
     Returns reference to hash like this:
 
