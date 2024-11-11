@@ -1,9 +1,9 @@
 TODO
 ====
-3. Kdyz se snazim vytvorit polozku, ktera uz existuje, tak mi to hodi error.
-5. Testy.
+3. When I am creating item which exists, there is an error.
+5. Tests.
 6. Existuje nejake volani, ktere jenom prelozi qid na label v jazyku?
-7. Doc pro Resolve.pm
+7. Doc for Resolve.pm
 8. Udelat neco jako MediaWiki::API::Wikibase a dalsi a prepsat to na ne.
    Jsou to bloky API.
 9. Rewrite to Wikibase::Datatype::JSON, ted je tam Struct a to neni typove v
