@@ -62,7 +62,6 @@ sub create_item {
 
 	$self->_init;
 
-
 	my ($type, $data) = $self->_obj2json($item_obj);
 	my $res = $self->{'mediawiki_api'}->api({
 		'action' => 'wbeditentity',
